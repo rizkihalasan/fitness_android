@@ -1,15 +1,6 @@
 <resources>
     <string name="app_name">FitnessDIY</string>
-    <string name="name">Name</string>
-    <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="phone">Phone Number</string>
-    <string name="address">Address</string>
-
-    <string name="choice_command">Choose your difficulty</string>
-    <string name="beginner">Beginner</string>
-    <string name="intermediate">Intermediate</string>
-    <string name="advanced">Advanced</string>
-
-
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
