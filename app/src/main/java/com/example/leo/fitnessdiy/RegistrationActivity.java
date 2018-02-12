@@ -1,17 +1,20 @@
 package com.example.leo.fitnessdiy;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RadioButton;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by Heil on 2/12/2018.
+ */
+
+public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration);
     }
+
 }
