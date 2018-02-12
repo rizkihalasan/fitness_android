@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">FitnessDIY</string>
-<<<<<<< HEAD
     <string name="logo_sub">Do It Yourself</string>
-=======
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
->>>>>>> 1eae9efeb4f06e5b2bc4295b06c363e1ea211597
 </resources>
