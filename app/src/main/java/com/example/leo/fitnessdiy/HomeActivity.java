@@ -5,16 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class LoginActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_home);
     }
 
-    public void doLogin(View view) {
-        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+    public void openHistory(View view) {
+        Intent i = new Intent(getApplicationContext(), HIstoryActivity.class);
         startActivity(i);
     }
 }
