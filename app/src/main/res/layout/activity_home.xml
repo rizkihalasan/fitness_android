@@ -4,14 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.leo.fitnessdiy.HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.leo.fitnessdiy.HomeActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/history-button"
-        android:text="@string/history"
-        android:onClick="openHistory"/>
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/history_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="changeFragment"
+            android:layout_weight="1"
+            android:text="@string/history"
+            />
+        <Button
+            android:id="@+id/exercise_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/exercise"
+            android:onClick="changeFragment"/>
+    </LinearLayout>
+    <fragment
+        android:name="com.example.leo.fitnessdiy.ExerciseFragment"
+        android:id="@+id/home_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
 
 </LinearLayout>
