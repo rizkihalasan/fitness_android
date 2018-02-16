@@ -22,7 +22,8 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".HIstoryActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".PlankActivity"></activity>
+        <activity android:name=".PlankActivity" />
+        <activity android:name=".LevelActivity"></activity>
     </application>
 
 </manifest>
