@@ -12,7 +12,8 @@ import android.support.v4.app.FragmentTransaction;
 
 public class HomeActivity extends AppCompatActivity
         implements ExerciseFragment.OnFragmentInteractionListener,
-                   HistoryFragment.OnFragmentInteractionListener{
+                   HistoryFragment.OnFragmentInteractionListener,
+                   BlankFragment.OnFragmentInteractionListener{
 
     private FloatingActionButton chatButton;
     @Override
@@ -38,12 +39,19 @@ public class HomeActivity extends AppCompatActivity
 
     public void changeFragment(View view){
         Fragment fragment;
+//        fragment = getSupportFragmentManager().findFragmentById(R.id.home_fragment);
+//        FragmentManager manager = getSupportFragmentManager();
+//        if (fragment != null) {
+//            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+//            manager.popBackStack();
+//        }
 
         if(view == findViewById(R.id.history_button)){
             fragment = new HistoryFragment();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.home_fragment, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
         else if(view == findViewById(R.id.exercise_button)){
@@ -51,6 +59,8 @@ public class HomeActivity extends AppCompatActivity
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.home_fragment, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
             ft.commit();
         }
     }
