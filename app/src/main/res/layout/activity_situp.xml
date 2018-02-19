@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="@string/pushup" />
+        android:text="@string/situp" />
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="@string/pushup_video" />
+        android:text="@string/situp_video" />
 
 
 
@@ -52,12 +52,12 @@
         <ImageView
             android:layout_width="260dp"
             android:layout_height="158dp"
-            android:src="@drawable/pushup_video_1" />
+            android:src="@drawable/situp_video_1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pushup_demo" />
+            android:text="@string/situp_demo" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,11 +73,11 @@
         <ImageView
             android:layout_width="258dp"
             android:layout_height="148dp"
-            android:src="@drawable/pushup_video_2" />
+            android:src="@drawable/situp_video_2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/motivation_pushup"/>
+            android:text="@string/motivation_situp"/>
     </LinearLayout>
 
     <!--</ScrollView>-->
