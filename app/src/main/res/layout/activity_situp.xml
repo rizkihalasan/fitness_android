@@ -1,86 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.leo.fitnessdiy.PushupActivity">
+    tools:context="com.example.leo.fitnessdiy.SitupActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="@string/situp" />
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginBottom="30dp"-->
-        <!--android:onClick="countDownPlank"-->
-        <!--android:text="start" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/count_timer"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:textSize="32sp"-->
-        <!--android:text="2 : 00" />-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="@string/situp_video" />
-
-
-
-    <!--<ScrollView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content">-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openVideo"
-        android:orientation="horizontal"
-        android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
+        android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="260dp"
-            android:layout_height="158dp"
-            android:src="@drawable/situp_video_1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/situp_demo" />
-    </LinearLayout>
+            android:layout_marginBottom="100dp"
+            android:text="@string/situp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openVideo"
-        android:layout_margin="4dp">
+        <TextView
+            android:id="@+id/sitUpTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Do Sit Up 30 times"
+            android:textSize="18dp" />
 
-        <ImageView
-            android:layout_width="258dp"
-            android:layout_height="148dp"
-            android:src="@drawable/situp_video_2" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:onClick="taskComplete"
+            android:text="Selesai" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/motivation_situp"/>
-    </LinearLayout>
+            android:layout_marginBottom="30dp"
+            android:text="@string/situp_video" />
 
+
+
+        <!--<ScrollView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openVideo"
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
+
+            <ImageView
+                android:layout_width="260dp"
+                android:layout_height="158dp"
+                android:src="@drawable/situp_video_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/situp_demo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openVideo"
+            android:layout_margin="4dp">
+
+            <ImageView
+                android:layout_width="258dp"
+                android:layout_height="148dp"
+                android:src="@drawable/situp_video_2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/motivation_situp"/>
+        </LinearLayout>
+
+    </LinearLayout>
     <!--</ScrollView>-->
 
 
-</LinearLayout>
+</ScrollView>

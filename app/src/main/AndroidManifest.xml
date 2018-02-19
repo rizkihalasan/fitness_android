@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SitupActivity`">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,6 +25,8 @@
         <activity android:name=".HIstoryActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".PlankActivity" />
+        <activity android:name=".PushupActivity" />
+        <activity android:name=".SitupActivity" />
         <activity android:name=".LevelActivity" />
         <activity android:name=".ExerciseActivity"></activity>
     </application>

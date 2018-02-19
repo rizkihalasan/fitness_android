@@ -4,11 +4,30 @@
     android:layout_height="match_parent"
     tools:context="com.example.leo.fitnessdiy.ExerciseFragment">
 
-    <Button
-        android:id="@+id/plank_button"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Plank"
-        />
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Push Up"
+            android:id="@+id/pushup_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sit Up"
+            android:id="@+id/situp_button" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plank"
+            android:id="@+id/plank_button"/>
+    </LinearLayout>
 
 </FrameLayout>

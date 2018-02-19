@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Created by Heil on 2/19/2018.
@@ -27,5 +28,11 @@ public class PushupActivity extends AppCompatActivity{
 
         intent.setData(Uri.parse(url));
         startActivity(intent);
+    }
+
+
+    public void taskComplete(View view) {
+        TextView tv = (TextView)findViewById(R.id.pushUpTask);
+        tv.setText("Berhasil");
     }
 }
