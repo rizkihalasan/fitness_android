@@ -20,4 +20,8 @@
     <string name="title_activity_jogging">Map</string>
     <string name="start">START</string>
     <string name="plank_video">Plank Video</string>
+    <string name="pushup">Push Up</string>
+    <string name="motivation_pushup">Push Up Challenge : Before and After</string>
+    <string name="pushup_demo">How to Push Up Properly</string>
+    <string name="pushup_video">Push Up Video</string>
 </resources>
