@@ -65,6 +65,10 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    public void openJogging(View view) {
+        Intent i = new Intent(getApplicationContext(), JoggingActivity.class);
+        startActivity(i);
+    }
     public void goToChat(View view) {
 
     }
