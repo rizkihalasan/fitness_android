@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity
         startActivity(i);
     }
     public void goToChat(View view) {
-
+        Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+        startActivity(i);
     }
 }

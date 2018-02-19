@@ -39,6 +39,7 @@
         <activity android:name=".PlankActivity" />
         <activity android:name=".PushupActivity" />
         <activity android:name=".SitupActivity" />
+        <activity android:name=".ChatActivity" />
         <activity android:name=".LevelActivity" />
         <activity android:name=".ExerciseActivity" />
         <!--

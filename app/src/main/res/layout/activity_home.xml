@@ -11,23 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/history_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="openHistory"
-            android:text="@string/history"/>
+            android:text="@string/history" />
+
         <Button
             android:id="@+id/exercise_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exercise"
-            android:onClick="changeFragment"/>
+            android:onClick="changeFragment"
+            android:text="@string/exercise" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jogging"
-            android:onClick="openJogging"/>
+            android:onClick="openJogging"
+            android:text="Jogging" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/chat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="3"
+            android:onClick="goToChat" />
+
     </LinearLayout>
 
     <fragment
@@ -35,14 +47,6 @@
         android:name="com.example.leo.fitnessdiy.BlankFragment"
         android:layout_width="match_parent"
         android:layout_height="471dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/chat_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:onClick="goToChat"/>
-
 
 
 </LinearLayout>
