@@ -5,10 +5,25 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
+import com.example.leo.fitnessdiy.model.History;
+import com.example.leo.fitnessdiy.model.Users;
+import com.example.leo.fitnessdiy.routes.api;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+
 public class PlankActivity extends AppCompatActivity {
+    private String LOG_TAG = "TES PLANK ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
