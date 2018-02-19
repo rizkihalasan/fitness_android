@@ -13,19 +13,21 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/history_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="changeFragment"
-            android:layout_weight="1"
-            android:text="@string/history"
-            />
+            android:onClick="openHistory"
+            android:text="@string/history"/>
         <Button
             android:id="@+id/exercise_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/exercise"
             android:onClick="changeFragment"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jogging"
+            android:onClick="openJogging"/>
     </LinearLayout>
     <fragment
         android:name="com.example.leo.fitnessdiy.ExerciseFragment"
