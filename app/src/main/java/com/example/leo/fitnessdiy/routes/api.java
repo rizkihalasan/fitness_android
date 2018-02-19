@@ -5,7 +5,11 @@ package com.example.leo.fitnessdiy.routes;
  */
 
 public class api {
-    public static final String BASE_URL = "http://192.168.100.102/fitness_server/";
+    public static final String BASE_URL = "http://10.0.2.2/fitness-server/";
+    // kalo emulator 10.0.2.2 atau 10.0.0.2
+    // atau ipconfig, cek ipv4
 
     public static final String HISTORY_URL = BASE_URL + "history.php?user=";
+
+    public static final String USERS_URL = BASE_URL + "users.php?user=";
 }
