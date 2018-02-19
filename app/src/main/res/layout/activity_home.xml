@@ -29,12 +29,19 @@
             android:text="Jogging"
             android:onClick="openJogging"/>
     </LinearLayout>
+
     <fragment
-        android:name="com.example.leo.fitnessdiy.ExerciseFragment"
         android:id="@+id/home_fragment"
+        android:name="com.example.leo.fitnessdiy.BlankFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="471dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/chat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:onClick="goToChat"/>
 
 
 
