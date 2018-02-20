@@ -5,7 +5,7 @@ package com.example.leo.fitnessdiy.routes;
  */
 
 public class api {
-    public static final String BASE_URL = "http://10.0.2.2/fitness-server/";
+    public static final String BASE_URL = "http://ekiwae21.000webhostapp.com/fitness-server/";
     // kalo emulator 10.0.2.2 atau 10.0.0.2
     // atau ipconfig, cek ipv4
 

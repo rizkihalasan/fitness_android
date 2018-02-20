@@ -36,13 +36,13 @@ public class HIstoryActivity extends AppCompatActivity {
 
 
         String fetchResults = null;
-//        try {
-//            githubSearchResults = NetworkUtils.getResponseFromHttpUrl(new URL(api.HISTORY_URL + "1"));
+        try {
+            fetchResults = NetworkUtils.getResponseFromHttpUrl(new URL(api.HISTORY_URL + "1"));
             fetchResults = "[{\"id\":\"1\",\"id_user\":\"1\",\"sport_name\":\"jogging\",\"sport_date\":\"2018-02-14\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"11:00:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"2\",\"id_user\":\"1\",\"sport_name\":\"jogging\",\"sport_date\":\"2018-02-15\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"11:00:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"3\",\"id_user\":\"1\",\"sport_name\":\"plank\",\"sport_date\":\"2018-02-16\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"09:45:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"4\",\"id_user\":\"1\",\"sport_name\":\"push-up\",\"sport_date\":\"2018-02-16\",\"sport_time_start\":\"10:00:00\",\"sport_time_end\":\"10:30:00\",\"created_at\":null,\"updated_at\":null}]";
             initializeData(fetchResults);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_history);
 

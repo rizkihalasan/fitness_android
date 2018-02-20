@@ -3,14 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://F:\informatika\pbd\fitness\android.iml" filepath="F:\informatika\pbd\fitness\android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\tugas\sem6\pbd\tubes\android\fitness.iml" filepath="D:\tugas\sem6\pbd\tubes\android\fitness.iml" />
-      <module fileurl="file://D:\Semester 6\PBD\Tugas Besar\android\fitness.iml" filepath="D:\Semester 6\PBD\Tugas Besar\android\fitness.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> 72145e9fc96a9a51b68466a1954fac1e7b7d53a0
     </modules>
   </component>
 </project>
