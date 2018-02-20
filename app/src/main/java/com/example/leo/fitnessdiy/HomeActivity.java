@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.leo.fitnessdiy";
     private final String BACKGROUND_KEY = "background";
-    private final String LOG_TAG = "MAIN ACTIVITY";
+    private final String LOG_TAG = "BACKGROUND";
     @Override
     public void onFragmentInteraction(Uri uri) {
 
@@ -52,15 +52,9 @@ public class HomeActivity extends AppCompatActivity
         chatButton.setImageResource(R.drawable.chat_icon);
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putInt(BACKGROUND_KEY, R.drawable.green_theme);
-        preferencesEditor.apply();
 
-//        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-
-//        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
-//        getWindow().getDecorView().setBackground(getResources().getDrawable(R.drawable.green_theme));
-//        Log.d(LOG_TAG, ""+background);
+        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
+        getWindow().getDecorView().setBackground(getResources().getDrawable(background));
     }
 
     public void openHistory(View view) {

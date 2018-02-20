@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 public class SettingActivity extends AppCompatActivity {
-    private String LOG_TAG = "SETTING ACTIVITY";
+    private String LOG_TAG = "BACKGROUND";
     private String sharedPrefFile = "com.example.leo.fitnessdiy";
     private final String BACKGROUND_KEY = "background";
     private SharedPreferences mPreferences;
@@ -26,8 +26,6 @@ public class SettingActivity extends AppCompatActivity {
         if(view.getId() == R.id.red_theme){
             background = R.drawable.red_theme;
         }
-        Log.d(LOG_TAG, ""+background);
-        Log.d(LOG_TAG, "tes");
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
