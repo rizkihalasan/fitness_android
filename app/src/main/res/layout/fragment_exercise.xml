@@ -28,6 +28,19 @@
             android:layout_height="wrap_content"
             android:text="Plank"
             android:id="@+id/plank_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jogging"
+            android:id="@+id/jogging_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LEVEL"
+            android:id="@+id/level_button"/>
+
     </LinearLayout>
 
 </FrameLayout>

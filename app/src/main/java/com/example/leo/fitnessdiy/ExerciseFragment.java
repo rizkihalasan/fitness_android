@@ -94,6 +94,24 @@ public class ExerciseFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        Button joggingButton = (Button)view.findViewById(R.id.jogging_button);
+        joggingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), JoggingActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button levelButton = (Button)view.findViewById(R.id.level_button);
+        levelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), LevelActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 
