@@ -79,33 +79,14 @@ public class PlankActivity extends AppCompatActivity {
         }.start();
     }
 
-    public Users initializeData(String data) {
-        Users user = new Users();
-        try {
-            JSONArray parser = new JSONArray(data);
-            JSONObject json = parser.getJSONObject(0);
 
-            int id = json.getInt("id");
-            String username = json.getString("username");
-            String password = json.getString("password");
-            String email = json.getString("email");
-            String phone_number = json.getString("phone_number");
-            int age = json.getInt("age");
-            String address = json.getString("address");
-            String level = json.getString("level");
-            user = new Users(id, username, password, email, phone_number, age, address, level);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
 
     public Users getUser(int user_id){
         Users user = new Users();
         try {
             URL url = new URL("http://ekiwae21.000webhostapp.com/fitness-server/users.php?user="+user_id);
             String fetchResults = NetworkUtils.getResponseFromHttpUrl(url);
-            user = initializeData(fetchResults);
+            user = Users.initializeData(fetchResults);
 
             Log.d(LOG_TAG, Integer.toString(user.getId()));
             Log.d(LOG_TAG, user.getLevel());

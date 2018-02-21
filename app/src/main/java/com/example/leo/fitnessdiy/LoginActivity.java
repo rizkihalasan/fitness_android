@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.leo.fitnessdiy.model.Users;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,17 +50,28 @@ public class LoginActivity extends AppCompatActivity {
         String email = edit_text_email.getText().toString();
         String password = edit_text_password.getText().toString();
         String response = "";
+        Users user = null;
         try {
-            response = getResponseFronHttpUrlPost(email, password);
+            response = getResponseFromHttpUrlPost(email, password);
+            Log.d("RESPONSE", response);
         } catch (IOException e){
             e.printStackTrace();
         }
-        Log.d(LOG_TAG, response);
-
-//        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-//        startActivity(i);
+        if(!response.equals("not_found")) {
+            user = Users.initializeData(response);
+        }
+        if(user == null){
+            Log.d(LOG_TAG, "Email atau password salah");
+        } else {
+            Log.d(LOG_TAG, "" + user.getId());
+            Log.d(LOG_TAG, user.getUsername());
+            Log.d(LOG_TAG, user.getEmail());
+            Log.d(LOG_TAG, user.getLevel());
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(i);
+        }
     }
-    public static String getResponseFronHttpUrlPost(String email, String password) throws IOException {
+    public static String getResponseFromHttpUrlPost(String email, String password) throws IOException {
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
