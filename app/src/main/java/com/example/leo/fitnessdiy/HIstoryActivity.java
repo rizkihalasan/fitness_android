@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.leo.fitnessdiy.Adapter.RecyclerViewAdapter;
 import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
 import com.example.leo.fitnessdiy.model.History;
+import com.example.leo.fitnessdiy.model.Jogging;
 import com.example.leo.fitnessdiy.routes.api;
 
 

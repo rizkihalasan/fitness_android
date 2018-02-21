@@ -10,7 +10,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -26,6 +28,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
+import com.example.leo.fitnessdiy.model.Jogging;
+import com.example.leo.fitnessdiy.routes.api;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -54,7 +59,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -94,13 +103,18 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     private String[] mLikelyPlaceAddresses;
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
-    private TextView infoJogging;
+    private TextView infoJoggingStart;
+    private TextView infoJoggingEnd;
     private Button mButton;
+    private String startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         // save instance state
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
@@ -120,7 +134,9 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        infoJogging = (TextView) findViewById(R.id.tv_info);
+        infoJoggingStart = (TextView) findViewById(R.id.tv_info_start);
+
+        infoJoggingEnd = (TextView) findViewById(R.id.tv_info_end);
 
         mButton = (Button) findViewById(R.id.control_button);
     }
@@ -197,8 +213,8 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                             mLastKnownLocation = task.getResult();
                             LatLng position = new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude());
-                            mMap.addMarker(
-                                    new MarkerOptions().position(position).title("Your Position"));
+//                            mMap.addMarker(
+//                                    new MarkerOptions().position(position).title("Your Position"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,
                                     DEFAULT_ZOOM));
                         } else {
@@ -424,7 +440,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         return loc;
     }
     public void startJogging(View view) {
-        infoJogging.setText(getCurrentLocation());
+        infoJoggingStart.setText(getCurrentLocation());
         mButton.setText("STOP");
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -433,10 +449,12 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
             }
         });
         mButton.setBackgroundColor(Color.parseColor("#FF0000"));
+        startTime = new SimpleDateFormat("HH:mm:ss")
+                .format(Calendar.getInstance().getTime());
     }
 
     public void stopJogging(View view) {
-        infoJogging.append("\n" + getCurrentLocation());
+        infoJoggingEnd.setText("\n" + getCurrentLocation());
         mButton.setText("START");
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -445,5 +463,54 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
             }
         });
         mButton.setBackgroundColor(Color.parseColor("#4CFF00"));
+
+        // TODO : Distance itung berapa langkah
+        float distance = 1000;
+        Calendar c = Calendar.getInstance();
+        Jogging jogging = new Jogging(
+                new SimpleDateFormat("yyyy-MM-dd").format(c.getTime()),
+                startTime,
+                new SimpleDateFormat("HH:mm:ss").format(c.getTime()),
+                distance,
+                infoJoggingStart.getText().toString(),
+                infoJoggingEnd.getText().toString()
+        );
+        // TODO : id_user sesuai id user yang login
+        int id_user = 1;
+        try {
+            String url = api.newJoggingHistory(
+                    id_user,
+                    jogging.getDate(),
+                    jogging.getStart(),
+                    jogging.getEnd(),
+                    jogging.getDistance(),
+                    jogging.getStartingPoint(),
+                    jogging.getEndPoint()
+            );
+            Log.d(TAG, url);
+            String response = NetworkUtils.getResponseFromHttpUrl(
+                    new URL(url)
+            );
+            JSONObject jsonObject = new JSONObject(response);
+            if (jsonObject.getString("error") == null) {
+                Log.d(TAG, "Inserting new record successful");
+            } else {
+                Log.e(TAG, jsonObject.getString("error"));
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+
+//    private class AddNewJogging extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//
+//        }
+//    }
 }
