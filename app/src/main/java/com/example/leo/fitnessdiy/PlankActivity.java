@@ -25,12 +25,12 @@ import java.util.ArrayList;
 
 public class PlankActivity extends AppCompatActivity {
     private String LOG_TAG = "TES PLANK ACTIVITY";
+    Users user = getUser(1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plank);
-//        printUser(1);
 
         SharedPreferences mPreferences;
         String sharedPrefFile = "com.example.leo.fitnessdiy";
@@ -39,6 +39,19 @@ public class PlankActivity extends AppCompatActivity {
 
         int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
+
+
+
+    }
+
+    public int setCountTime(Users user){
+        if(user.getLevel().equals("begineer")){
+            return 60000;
+        } else if(user.getLevel().equals("intermediate")){
+            return 120000;
+        } else {
+            return 180000;
+        }
     }
 
     public String milisecondToMinutes(long l){
@@ -52,7 +65,7 @@ public class PlankActivity extends AppCompatActivity {
 
     public void countDownPlank(View view) {
         final TextView countText = findViewById(R.id.count_timer);
-        new CountDownTimer(120000, 1000){
+        new CountDownTimer(setCountTime(user), 1000){
             @Override
             public void onTick(long l) {
                 String waktu = milisecondToMinutes(l);
@@ -66,38 +79,21 @@ public class PlankActivity extends AppCompatActivity {
         }.start();
     }
 
-    public Users initializeData(String data) {
+
+
+    public Users getUser(int user_id){
         Users user = new Users();
         try {
-            JSONArray parser = new JSONArray(data);
-            JSONObject json = parser.getJSONObject(0);
-
-            int id = json.getInt("id");
-            String username = json.getString("username");
-            String password = json.getString("password");
-            String email = json.getString("email");
-            String phone_number = json.getString("phone_number");
-            int age = json.getInt("age");
-            String address = json.getString("address");
-            String level = json.getString("level");
-            user = new Users(id, username, password, email, phone_number, age, address, level);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-    public void printUser(int user_id){
-        try {
-            URL url = new URL("http://ekiwae21.000webhostapp.com/fitness-server/users.php?user=1");
+            URL url = new URL("http://ekiwae21.000webhostapp.com/fitness-server/users.php?user="+user_id);
             String fetchResults = NetworkUtils.getResponseFromHttpUrl(url);
-            Users user = initializeData(fetchResults);
+            user = Users.initializeData(fetchResults);
 
             Log.d(LOG_TAG, Integer.toString(user.getId()));
             Log.d(LOG_TAG, user.getLevel());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return user;
     }
 
     public void openVideo(View view) {

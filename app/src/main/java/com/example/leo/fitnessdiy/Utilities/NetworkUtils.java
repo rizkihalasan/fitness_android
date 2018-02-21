@@ -2,6 +2,7 @@ package com.example.leo.fitnessdiy.Utilities;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -58,6 +59,10 @@ public class NetworkUtils {
      * @throws IOException Related to network and stream reading
      */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();

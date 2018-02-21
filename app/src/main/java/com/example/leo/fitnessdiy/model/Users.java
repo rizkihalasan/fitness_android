@@ -1,5 +1,9 @@
 package com.example.leo.fitnessdiy.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Users {
     private int id;
     private String username;
@@ -62,5 +66,26 @@ public class Users {
 
     public String getLevel() {
         return level;
+    }
+
+    public static Users initializeData(String data) {
+        Users user = new Users();
+        try {
+            JSONArray parser = new JSONArray(data);
+            JSONObject json = parser.getJSONObject(0);
+
+            int id = json.getInt("id");
+            String username = json.getString("username");
+            String password = json.getString("password");
+            String email = json.getString("email");
+            String phone_number = json.getString("phone_number");
+            int age = json.getInt("age");
+            String address = json.getString("address");
+            String level = json.getString("level");
+            user = new Users(id, username, password, email, phone_number, age, address, level);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }
