@@ -17,9 +17,16 @@ public class LoginActivity extends AppCompatActivity {
         String sharedPrefFile = "com.example.leo.fitnessdiy";
         final String BACKGROUND_KEY = "background";
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-
-        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
-        getWindow().getDecorView().setBackground(getResources().getDrawable(background));
+        int background = R.drawable.green_theme;
+        try{
+            background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
+        } catch(ClassCastException e){
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            preferencesEditor.putInt(BACKGROUND_KEY, background);
+            preferencesEditor.apply();
+        } finally {
+            getWindow().getDecorView().setBackground(getResources().getDrawable(background));
+        }
     }
 
     public void doLogin(View view) {
