@@ -2,12 +2,25 @@ package com.example.leo.fitnessdiy;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private String LOG_TAG = "LOGIN ACTIVITY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +43,58 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void doLogin(View view) {
-        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(i);
+        EditText edit_text_email = (EditText)findViewById(R.id.login_email);
+        EditText edit_text_password = (EditText)findViewById(R.id.login_password);
+        String email = edit_text_email.getText().toString();
+        String password = edit_text_password.getText().toString();
+        String response = "";
+        try {
+            response = getResponseFronHttpUrlPost(email, password);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        Log.d(LOG_TAG, response);
+
+//        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+//        startActivity(i);
+    }
+    public static String getResponseFronHttpUrlPost(String email, String password) throws IOException {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        try {
+            String urlstring = "http://ekiwae21.000webhostapp.com/fitness-server/login.php";
+            URL url = new URL(urlstring);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("email", email)
+                    .appendQueryParameter("password", password);
+            String query = builder.build().getQuery();
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(query);
+            writer.flush();
+            writer.close();
+            os.close();
+            urlConnection.connect();
+
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
