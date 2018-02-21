@@ -16,6 +16,14 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        SharedPreferences mPreferences;
+        String sharedPrefFile = "com.example.leo.fitnessdiy";
+        final String BACKGROUND_KEY = "background";
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
+        getWindow().getDecorView().setBackground(getResources().getDrawable(background));
     }
 
     public void changeBackgroundColor(View view) {
@@ -25,6 +33,12 @@ public class SettingActivity extends AppCompatActivity {
         }
         if(view.getId() == R.id.red_theme){
             background = R.drawable.red_theme;
+        }
+        if(view.getId() == R.id.beach_theme){
+            background = R.drawable.beach_theme;
+        }
+        if(view.getId() == R.id.natural_theme){
+            background = R.drawable.natural_theme;
         }
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);

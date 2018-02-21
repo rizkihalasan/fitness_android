@@ -21,9 +21,7 @@ public class HomeActivity extends AppCompatActivity
                    BlankFragment.OnFragmentInteractionListener{
 
     private FloatingActionButton chatButton;
-    private SharedPreferences mPreferences;
-    private String sharedPrefFile = "com.example.leo.fitnessdiy";
-    private final String BACKGROUND_KEY = "background";
+
     private final String LOG_TAG = "BACKGROUND";
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -51,8 +49,11 @@ public class HomeActivity extends AppCompatActivity
         chatButton = findViewById(R.id.chat_button);
         chatButton.setImageResource(R.drawable.chat_icon);
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        SharedPreferences mPreferences;
+        String sharedPrefFile = "com.example.leo.fitnessdiy";
+        final String BACKGROUND_KEY = "background";
 
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
     }

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/green_theme"
-        android:text="green_theme"
+        android:text="Green Theme"
         android:textSize="20sp"
         android:layout_margin="6dp"
         android:onClick="changeBackgroundColor"
@@ -37,7 +37,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/red_theme"
-        android:text="red_theme"
+        android:text="Red Theme"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        android:onClick="changeBackgroundColor"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/beach_theme"
+        android:text="Beach Theme"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        android:onClick="changeBackgroundColor"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/natural_theme"
+        android:text="Natural Theme"
         android:textSize="20sp"
         android:layout_margin="6dp"
         android:onClick="changeBackgroundColor"/>

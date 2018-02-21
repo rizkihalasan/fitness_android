@@ -1,6 +1,7 @@
 package com.example.leo.fitnessdiy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,14 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        SharedPreferences mPreferences;
+        String sharedPrefFile = "com.example.leo.fitnessdiy";
+        final String BACKGROUND_KEY = "background";
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
+        getWindow().getDecorView().setBackground(getResources().getDrawable(background));
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
