@@ -4,44 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.leo.fitnessdiy.PlankActivity">
+    tools:context="com.example.leo.fitnessdiy.SitupActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="@string/plank"
-            android:textSize="32sp" />
+            android:layout_marginBottom="100dp"
+            android:text="@string/situp" />
+
+        <TextView
+            android:id="@+id/sitUpTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Do Sit Up 30 times"
+            android:textSize="18dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
-            android:onClick="countDownPlank"
-            android:text="start" />
-
-        <TextView
-            android:id="@+id/count_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="2 : 00"
-            android:textSize="32sp" />
+            android:onClick="taskComplete"
+            android:text="Selesai" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:text="@string/plank_video"
-            android:textSize="30sp"/>
+            android:text="@string/situp_video" />
 
 
+
+        <!--<ScrollView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,45 +53,42 @@
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:orientation="vertical"
-            android:tag="https://www.youtube.com/watch?v=TvxNkmjdhMM">
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:src="@drawable/plank_video_1" />
+                android:layout_width="260dp"
+                android:layout_height="158dp"
+                android:src="@drawable/situp_video_1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How to Plank"
-                android:textSize="20sp" />
+                android:text="@string/situp_demo" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0"
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:orientation="vertical"
-            android:tag="https://www.youtube.com/watch?v=_nZgpZLf7ZA">
+            android:layout_margin="4dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:src="@drawable/plank_video_2" />
-
+                android:layout_width="258dp"
+                android:layout_height="148dp"
+                android:src="@drawable/situp_video_2" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Benefits of Plank"
-                android:textSize="20sp" />
+                android:text="@string/motivation_situp"/>
         </LinearLayout>
-
 
     </LinearLayout>
+    <!--</ScrollView>-->
+
+
 </ScrollView>

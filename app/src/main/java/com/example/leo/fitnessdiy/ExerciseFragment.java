@@ -67,11 +67,48 @@ public class ExerciseFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exercise, container, false);
+
+        Button pushupButton = (Button)view.findViewById(R.id.pushup_button);
+        pushupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), PushupActivity.class);
+                startActivity(i);
+            }
+        });
+        
+        Button situpButton = (Button)view.findViewById(R.id.situp_button);
+        situpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), SitupActivity.class);
+                startActivity(i);
+            }
+        });
+        
         Button plankButton = (Button)view.findViewById(R.id.plank_button);
         plankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), PlankActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button joggingButton = (Button)view.findViewById(R.id.jogging_button);
+        joggingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), JoggingActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button levelButton = (Button)view.findViewById(R.id.level_button);
+        levelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), LevelActivity.class);
                 startActivity(i);
             }
         });

@@ -1,7 +1,9 @@
 package com.example.leo.fitnessdiy.Utilities;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;

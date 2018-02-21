@@ -1,10 +1,15 @@
 package com.example.leo.fitnessdiy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,11 +21,26 @@ public class HomeActivity extends AppCompatActivity
                    BlankFragment.OnFragmentInteractionListener{
 
     private FloatingActionButton chatButton;
+
+    private final String LOG_TAG = "BACKGROUND";
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_setting_background) {
+            Intent i = new Intent(this, SettingActivity.class);
+            startActivity(i);
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +48,14 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         chatButton = findViewById(R.id.chat_button);
         chatButton.setImageResource(R.drawable.chat_icon);
+
+        SharedPreferences mPreferences;
+        String sharedPrefFile = "com.example.leo.fitnessdiy";
+        final String BACKGROUND_KEY = "background";
+
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
+        getWindow().getDecorView().setBackground(getResources().getDrawable(background));
     }
 
     public void openHistory(View view) {
@@ -39,12 +67,6 @@ public class HomeActivity extends AppCompatActivity
 
     public void changeFragment(View view){
         Fragment fragment;
-//        fragment = getSupportFragmentManager().findFragmentById(R.id.home_fragment);
-//        FragmentManager manager = getSupportFragmentManager();
-//        if (fragment != null) {
-//            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-//            manager.popBackStack();
-//        }
 
         if(view == findViewById(R.id.history_button)){
             fragment = new HistoryFragment();
@@ -70,6 +92,9 @@ public class HomeActivity extends AppCompatActivity
         startActivity(i);
     }
     public void goToChat(View view) {
-
+        Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+        startActivity(i);
     }
+
+
 }

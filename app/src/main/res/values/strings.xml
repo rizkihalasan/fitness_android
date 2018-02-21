@@ -24,4 +24,8 @@
     <string name="motivation_pushup">Push Up Challenge : Before and After</string>
     <string name="pushup_demo">How to Push Up Properly</string>
     <string name="pushup_video">Push Up Video</string>
+    <string name="situp">Sit Up</string>
+    <string name="motivation_situp">Sit Up Challenge : Before and After</string>
+    <string name="situp_demo">How to do sit up properly</string>
+    <string name="situp_video">Sit Up Video</string>
 </resources>

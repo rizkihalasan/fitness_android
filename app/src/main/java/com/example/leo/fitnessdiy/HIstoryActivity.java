@@ -1,6 +1,8 @@
 package com.example.leo.fitnessdiy;
 
 
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -33,12 +35,17 @@ public class HIstoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         String fetchResults = null;
         try {
-            fetchResults = NetworkUtils.getResponseFromHttpUrl(new URL(api.HISTORY_URL + "1"));
+
 //            fetchResults = "[{\"id\":\"1\",\"id_user\":\"1\",\"sport_name\":\"jogging\",\"sport_date\":\"2018-02-14\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"11:00:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"2\",\"id_user\":\"1\",\"sport_name\":\"jogging\",\"sport_date\":\"2018-02-15\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"11:00:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"3\",\"id_user\":\"1\",\"sport_name\":\"plank\",\"sport_date\":\"2018-02-16\",\"sport_time_start\":\"09:00:00\",\"sport_time_end\":\"09:45:00\",\"created_at\":null,\"updated_at\":null},{\"id\":\"4\",\"id_user\":\"1\",\"sport_name\":\"push-up\",\"sport_date\":\"2018-02-16\",\"sport_time_start\":\"10:00:00\",\"sport_time_end\":\"10:30:00\",\"created_at\":null,\"updated_at\":null}]";
+            fetchResults = NetworkUtils.getResponseFromHttpUrl(new URL(api.HISTORY_URL + "1"));
+
             initializeData(fetchResults);
         } catch (IOException e) {
             e.printStackTrace();
