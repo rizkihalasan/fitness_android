@@ -34,15 +34,17 @@
         android:textSize="20sp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:background="@drawable/buttton_login"
         android:layout_margin="8dp"
         android:onClick="doLogin"
         android:text="@string/login" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="191dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Don't Have Account?"
         android:layout_margin="8dp"
-        android:onClick="toRegister"/>
+        android:background="@drawable/buttton_grey"
+        android:onClick="toRegister"
+        android:text="Don't Have Account?" />
 </LinearLayout>
