@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/name"
+            android:hint="@string/name"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="55dp" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@string/password"
+            android:hint="@string/password"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="131dp" />
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="@string/email"
+            android:hint="@string/email"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="206dp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
-            android:text="@string/phone"
+            android:hint="@string/phone"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="272dp" />
 
@@ -60,7 +60,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPostalAddress"
-            android:text="@string/address"
+            android:hint="@string/address"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="344dp" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:hint="Age"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="344dp" />
 
@@ -76,30 +86,40 @@
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/beginner"
+                android:id="@+id/level_begineer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/beginner"
                 tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="417dp" />
+                tools:layout_editor_absoluteY="417dp"
+                android:onClick="getLevel"/>
 
             <RadioButton
-                android:id="@+id/intermediate"
+                android:id="@+id/level_intermediate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/intermediate"
                 tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="463dp" />
+                tools:layout_editor_absoluteY="463dp"
+                android:onClick="getLevel"/>
 
             <RadioButton
-                android:id="@+id/advance"
+                android:id="@+id/level_advanced"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/advanced"
                 tools:layout_editor_absoluteX="220dp"
-                tools:layout_editor_absoluteY="417dp" />
+                tools:layout_editor_absoluteY="417dp"
+                android:onClick="getLevel"/>
 
         </RadioGroup>
+
+        <Button
+            android:id="@+id/registration_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTER"
+            android:onClick="doRegistration"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
