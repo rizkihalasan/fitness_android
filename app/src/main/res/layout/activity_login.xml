@@ -2,9 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:background="@drawable/layout_bg"
     android:orientation="vertical"
+    android:layout_gravity="top|center"
     tools:context="com.example.leo.fitnessdiy.LoginActivity">
 
 
@@ -25,19 +28,21 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:layout_margin="8dp"/>
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:textSize="20sp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="@string/login"
         android:layout_margin="8dp"
-        android:onClick="doLogin"/>
+        android:onClick="doLogin"
+        android:text="@string/login" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="REGISTER"
+        android:text="Don't Have Account?"
         android:layout_margin="8dp"
         android:onClick="toRegister"/>
 </LinearLayout>

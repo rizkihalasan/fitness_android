@@ -6,39 +6,93 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/layout_bg"
         android:layout_gravity="center">
-        <Button
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Push Up"
-            android:id="@+id/pushup_button"/>
+            android:layout_gravity="center">
 
-        <Button
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/pushup_icon" />
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/situp_icon" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sit Up"
-            android:id="@+id/situp_button" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp">
+
+            <Button
+                android:id="@+id/pushup_button"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Push Up" />
+
+            <Button
+                android:id="@+id/situp_button"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Sit Up" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/plank_icon" />
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="88dp"
+                android:src="@drawable/jogging_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="center" >
+
+            <Button
+                android:id="@+id/plank_button"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Plank" />
+
+            <Button
+                android:id="@+id/jogging_button"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Jogging" />
+        </LinearLayout>
 
 
         <Button
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plank"
-            android:id="@+id/plank_button"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jogging"
-            android:id="@+id/jogging_button"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LEVEL"
+            android:text="CHANGE LEVEL"
             android:id="@+id/level_button"/>
 
     </LinearLayout>

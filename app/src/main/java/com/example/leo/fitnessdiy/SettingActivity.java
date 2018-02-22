@@ -37,8 +37,14 @@ public class SettingActivity extends AppCompatActivity {
         if(view.getId() == R.id.beach_theme){
             background = R.drawable.beach_theme;
         }
-        if(view.getId() == R.id.natural_theme){
-            background = R.drawable.natural_theme;
+        if(view.getId() == R.id.beach_theme_2){
+            background = R.drawable.beach_2_theme;
+        }
+        if(view.getId() == R.id.cartoon_theme){
+            background = R.drawable.cartoon_theme;
+        }
+        if(view.getId() == R.id.cat_theme){
+            background = R.drawable.cat_theme;
         }
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
