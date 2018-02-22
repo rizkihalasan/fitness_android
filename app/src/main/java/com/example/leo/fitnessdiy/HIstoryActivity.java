@@ -2,25 +2,21 @@ package com.example.leo.fitnessdiy;
 
 
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.AsyncTask;
-import android.os.StrictMode;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
-import com.example.leo.fitnessdiy.Adapter.JogginHistoryAdapter;
-import com.example.leo.fitnessdiy.Adapter.PlankHistoryAdapter;
+import com.example.leo.fitnessdiy.Adapter.JoggingListAdapter;
+import com.example.leo.fitnessdiy.Adapter.PlankListAdapter;
+import com.example.leo.fitnessdiy.Adapter.PushupListAdapter;
+import com.example.leo.fitnessdiy.Adapter.SitupListAdapter;
 import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
-import com.example.leo.fitnessdiy.model.History;
 import com.example.leo.fitnessdiy.model.Jogging;
 import com.example.leo.fitnessdiy.model.Plank;
 import com.example.leo.fitnessdiy.model.PushUp;
@@ -40,14 +36,15 @@ import java.util.List;
 
 
 public class HIstoryActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
-    private RecyclerView plankRecyclerView;
+    private ListView mHistoryView;
     private List<Jogging> joggingHistory = new ArrayList<>();
     private CardView jogging;
     private CardView plank;
-    private List<PushUp> pushupHistory;
+    private CardView pushup;
+    private CardView situp;
+    private List<PushUp> pushupHistory = new ArrayList<>();
     private List<Plank> plankHistory = new ArrayList<>();
-    private List<SitUp> situpHistory;
+    private List<SitUp> situpHistory = new ArrayList<>();
     public static final String TAG = HIstoryActivity.class.getSimpleName();
 
     @Override
@@ -55,61 +52,55 @@ public class HIstoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.jogging_history);
-        mRecyclerView.setVisibility(View.GONE);
+        mHistoryView = (ListView) findViewById(R.id.history);
 
-        plankRecyclerView = (RecyclerView) findViewById(R.id.plank_history);
-        plankRecyclerView.setVisibility(View.GONE);
-
-        getJoggingData();
-        getPlankData();
+        final PlankListAdapter plankListAdapter = new PlankListAdapter(plankHistory, this);
 
         jogging = (CardView) findViewById(R.id.jogging);
+        jogging.setVisibility(View.GONE);
         jogging.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Jogging Title Clicked");
-                if (mRecyclerView.getVisibility() == View.GONE) {
-                    Log.d(TAG, "Jogging View Gone");
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-
-//        Set Jogging Adapter
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
-                    JogginHistoryAdapter adapter = new JogginHistoryAdapter(joggingHistory);
-                    mRecyclerView.setAdapter(adapter);
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                } else {
-                    Log.d(TAG, "Jogging View Visible");
-                    mRecyclerView.setVisibility(View.GONE);
-                    mRecyclerView.removeAllViewsInLayout();
-                }
+                JoggingListAdapter joggingListAdapter = new JoggingListAdapter(joggingHistory,
+                        getApplicationContext());
+                mHistoryView.setAdapter(joggingListAdapter);
             }
         });
 
         plank = (CardView) findViewById(R.id.plank);
+        plank.setVisibility(View.GONE);
         plank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Plank Title Clicked");
-                if (plankRecyclerView.getVisibility() == View.GONE) {
-                    LinearLayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext());
-                    //Set Plank Adapter
-                    plankRecyclerView.setLayoutManager(layoutManager2);
-                    plankRecyclerView.setHasFixedSize(true);
-                    PlankHistoryAdapter pa = new PlankHistoryAdapter(plankHistory);
-                    plankRecyclerView.setAdapter(pa);
-                    plankRecyclerView.setVisibility(View.VISIBLE);
-                    Log.d(TAG, "Plank View Now Visible");
-                } else {
-                    plankRecyclerView.setVisibility(View.GONE);
-                    plankRecyclerView.removeAllViewsInLayout();
-                    Log.d(TAG, "Plank View Now Gone");
-
-                }
+                PlankListAdapter plankListAdapter1 = new PlankListAdapter(plankHistory,
+                        getApplicationContext());
+                mHistoryView.setAdapter(plankListAdapter);
             }
         });
 
+        pushup = (CardView) findViewById(R.id.pushup);
+        pushup.setVisibility(View.GONE);
+        pushup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PushupListAdapter pushupListAdapter = new PushupListAdapter(pushupHistory,
+                        getApplicationContext());
+                mHistoryView.setAdapter(pushupListAdapter);
+            }
+        });
+
+        situp = (CardView) findViewById(R.id.situp);
+        situp.setVisibility(View.GONE);
+        situp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SitupListAdapter situpListAdapter = new SitupListAdapter(situpHistory,
+                        getApplicationContext());
+                mHistoryView.setAdapter(situpListAdapter);
+            }
+        });
+
+        new GetData(this).execute();
     }
 
     public void getJoggingData() {
@@ -129,7 +120,6 @@ public class HIstoryActivity extends AppCompatActivity {
                         jsonObject.getString("starting_point"),
                         jsonObject.getString("end_point")
                 ));
-                Log.d(TAG, i + jsonObject.getString("jogging_date"));
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -162,6 +152,88 @@ public class HIstoryActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void getPushupData() {
+        try {
+            String response = NetworkUtils.getResponseFromHttpUrl(
+                    new URL(api.PUSHUP_HISTORY_URL + "1")
+            );
+            Log.d(TAG, response);
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                pushupHistory.add(new PushUp(
+                        jsonObject.getString("pushup_date"),
+                        jsonObject.getString("pushup_time_start"),
+                        jsonObject.getString("pushup_time_end"),
+                        jsonObject.getInt("pushup_frequency")
+                ));
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getSitupData() {
+        try {
+            String response = NetworkUtils.getResponseFromHttpUrl(
+                    new URL(api.SITUP_HISTORY_URL + "1")
+            );
+            Log.d(TAG, response);
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                situpHistory.add(new SitUp(
+                        jsonObject.getString("situp_date"),
+                        jsonObject.getString("situp_time_start"),
+                        jsonObject.getString("situp_time_end"),
+                        jsonObject.getInt("situp_frequency")
+                ));
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class GetData extends AsyncTask<Void, Void, Void>{
+        private Context context;
+
+        public GetData(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            getJoggingData();
+            getPlankData();
+            getPushupData();
+            getSitupData();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            ProgressBar pg = (ProgressBar) findViewById(R.id.proCollage);
+            pg.setVisibility(View.GONE);
+            jogging.setVisibility(View.VISIBLE);
+            plank.setVisibility(View.VISIBLE);
+            pushup.setVisibility(View.VISIBLE);
+            situp.setVisibility(View.VISIBLE);
         }
     }
 }

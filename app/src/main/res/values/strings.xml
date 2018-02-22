@@ -30,4 +30,6 @@
     <string name="situp_video">Sit Up Video</string>
     <string name="jogging_history">Jogging History</string>
     <string name="plank_history">Plank History</string>
+    <string name="pushup_history">Push Up History</string>
+    <string name="situp_history">Sit Up History</string>
 </resources>

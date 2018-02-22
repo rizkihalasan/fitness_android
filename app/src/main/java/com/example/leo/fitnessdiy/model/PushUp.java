@@ -8,9 +8,9 @@ public class PushUp {
     private String date;
     private String start;
     private String end;
-    private String frequency;
+    private int frequency;
 
-    public PushUp(String date, String start, String end, String frequency) {
+    public PushUp(String date, String start, String end, int frequency) {
         this.date = date;
         this.start = start;
         this.end = end;
@@ -41,11 +41,11 @@ public class PushUp {
         this.end = end;
     }
 
-    public String getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(String frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
 }
