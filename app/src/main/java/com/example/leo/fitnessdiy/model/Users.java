@@ -71,15 +71,16 @@ public class Users {
     public static Users initializeData(String data) {
         Users user = new Users();
         try {
-            JSONArray parser = new JSONArray(data);
-            JSONObject json = parser.getJSONObject(0);
+//            JSONArray parser = new JSONArray(data);
+            JSONObject json = new JSONObject(data);
+//                    parser.getJSONObject(0);
 
-            int id = json.getInt("id");
+            int id = Integer.parseInt(json.getString("id"));
             String username = json.getString("username");
             String password = json.getString("password");
             String email = json.getString("email");
             String phone_number = json.getString("phone_number");
-            int age = json.getInt("age");
+            int age = Integer.parseInt(json.getString("age"));
             String address = json.getString("address");
             String level = json.getString("level");
             user = new Users(id, username, password, email, phone_number, age, address, level);

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
 import com.example.leo.fitnessdiy.model.Users;
+import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
 import com.example.leo.fitnessdiy.routes.api;
 
 import org.json.JSONArray;
@@ -24,29 +25,26 @@ import java.util.ArrayList;
 
 public class PlankActivity extends AppCompatActivity {
     private String LOG_TAG = "TES PLANK ACTIVITY";
-    Users user = getUser(1);
-
+    String sharedPrefFile = "com.example.leo.fitnessdiy";
+    private SharedPreferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plank);
 
         SharedPreferences mPreferences;
-        String sharedPrefFile = "com.example.leo.fitnessdiy";
-        final String BACKGROUND_KEY = "background";
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
+        final String BACKGROUND_KEY = "background";
+
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
-
-
-
     }
 
-    public int setCountTime(Users user){
-        if(user.getLevel().equals("begineer")){
+    public int setCountTime(String level){
+        if(level.equals("begineer")){
             return 60000;
-        } else if(user.getLevel().equals("intermediate")){
+        } else if(level.equals("intermediate")){
             return 120000;
         } else {
             return 180000;
@@ -64,7 +62,9 @@ public class PlankActivity extends AppCompatActivity {
 
     public void countDownPlank(View view) {
         final TextView countText = findViewById(R.id.count_timer);
-        new CountDownTimer(setCountTime(user), 1000){
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        String level = mPreferences.getString(UsersSharedPreferences.LEVEL_USERS, "begineer");
+        new CountDownTimer(setCountTime(level), 1000){
             @Override
             public void onTick(long l) {
                 String waktu = milisecondToMinutes(l);
@@ -78,22 +78,6 @@ public class PlankActivity extends AppCompatActivity {
         }.start();
     }
 
-
-
-    public Users getUser(int user_id){
-        Users user = new Users();
-        try {
-            URL url = new URL("http://ekiwae21.000webhostapp.com/fitness-server/users.php?user="+user_id);
-            String fetchResults = NetworkUtils.getResponseFromHttpUrl(url);
-            user = Users.initializeData(fetchResults);
-
-            Log.d(LOG_TAG, Integer.toString(user.getId()));
-            Log.d(LOG_TAG, user.getLevel());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
 
     public void openVideo(View view) {
         String url = (String)view.getTag();

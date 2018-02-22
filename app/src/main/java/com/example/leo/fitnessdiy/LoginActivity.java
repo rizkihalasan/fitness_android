@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.leo.fitnessdiy.model.Users;
+import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -23,14 +25,15 @@ import java.util.Scanner;
 
 public class LoginActivity extends AppCompatActivity {
     private String LOG_TAG = "LOGIN ACTIVITY";
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile = "com.example.leo.fitnessdiy";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences mPreferences;
-        String sharedPrefFile = "com.example.leo.fitnessdiy";
         final String BACKGROUND_KEY = "background";
+
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         int background = R.drawable.green_theme;
         try{
@@ -53,24 +56,33 @@ public class LoginActivity extends AppCompatActivity {
         Users user = null;
         try {
             response = getResponseFromHttpUrlPost(email, password);
-            Log.d("RESPONSE", response);
+//            Log.d("RESPONSE", response);
         } catch (IOException e){
             e.printStackTrace();
         }
         if(!response.equals("not_found")) {
+            Log.d(LOG_TAG, response);
             user = Users.initializeData(response);
+//            Log.d(LOG_TAG, "" + user.getId());
+//            Log.d(LOG_TAG, user.getUsername());
+//            Log.d(LOG_TAG, user.getEmail());
+//            Log.d(LOG_TAG, user.getLevel());
+            mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+            UsersSharedPreferences.setUserSharedPreferences(mPreferences, user);
+//            Log.d(LOG_TAG, mPreferences.getString(UsersSharedPreferences.EMAIL_USERS, "user tidak ditemukan"));
+//            Log.d(LOG_TAG, mPreferences.getString(UsersSharedPreferences.PASSWORD_USERS, "user tidak ditemukan"));
         }
         if(user == null){
-            Log.d(LOG_TAG, "Email atau password salah");
+            Toast.makeText(getApplicationContext(), "Email atau password salah", Toast.LENGTH_SHORT).show();
         } else {
-            Log.d(LOG_TAG, "" + user.getId());
-            Log.d(LOG_TAG, user.getUsername());
-            Log.d(LOG_TAG, user.getEmail());
-            Log.d(LOG_TAG, user.getLevel());
+
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(i);
         }
     }
+
+
+
     public static String getResponseFromHttpUrlPost(String email, String password) throws IOException {
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -109,5 +121,10 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void toRegister(View view) {
+        Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(i);
     }
 }
