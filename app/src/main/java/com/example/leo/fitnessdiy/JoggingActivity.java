@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,6 +19,7 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -29,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
+import com.example.leo.fitnessdiy.Utilities.PositionUtils;
 import com.example.leo.fitnessdiy.model.Jogging;
 import com.example.leo.fitnessdiy.routes.api;
 import com.google.android.gms.common.ConnectionResult;
@@ -68,6 +74,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class JoggingActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -108,6 +115,9 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     private TextView infoJoggingEnd;
     private Button mButton;
     private String startTime;
+    SensorManager sensorManager;
+    Sensor stepSensor;
+    private double distance = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,6 +261,10 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     public void onLocationChanged(Location location) {
         mMap.clear();
 
+        distance += PositionUtils.distance(mLastKnownLocation.getLatitude(),
+                mLastKnownLocation.getLongitude(),
+                location.getLatitude(),
+                location.getLongitude());
         MarkerOptions mp = new MarkerOptions();
 
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
@@ -260,6 +274,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16
         ));
+        mLastKnownLocation = location;
     }
 
     @Override
@@ -449,6 +464,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         mButton.setBackgroundColor(Color.parseColor("#FF0000"));
         startTime = new SimpleDateFormat("HH:mm:ss")
                 .format(Calendar.getInstance().getTime());
+        distance = 0;
     }
 
     public void stopJogging(View view) {
@@ -463,13 +479,12 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         mButton.setBackgroundColor(Color.parseColor("#4CFF00"));
 
         // TODO : Distance itung berapa langkah
-        float distance = 1000;
         Calendar c = Calendar.getInstance();
         Jogging jogging = new Jogging(
                 new SimpleDateFormat("yyyy-MM-dd").format(c.getTime()),
                 startTime,
                 new SimpleDateFormat("HH:mm:ss").format(c.getTime()),
-                distance,
+                (float) distance,
                 infoJoggingStart.getText().toString(),
                 infoJoggingEnd.getText().toString()
         );
@@ -483,7 +498,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                 jogging.getDistance(),
                 jogging.getStartingPoint(),
                 jogging.getEndPoint()
-        );
+        ).replaceAll(" ", "%20");
         Log.d(TAG, url);
         try {
             String response = NetworkUtils.getResponseFromHttpUrl(

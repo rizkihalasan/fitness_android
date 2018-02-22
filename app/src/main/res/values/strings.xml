@@ -28,4 +28,6 @@
     <string name="motivation_situp">Sit Up Challenge : Before and After</string>
     <string name="situp_demo">How to do sit up properly</string>
     <string name="situp_video">Sit Up Video</string>
+    <string name="jogging_history">Jogging History</string>
+    <string name="plank_history">Plank History</string>
 </resources>
