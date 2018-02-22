@@ -34,13 +34,13 @@ public class SitupActivity extends AppCompatActivity{
     }
 
     public void setSitUpFrequency(String level){
-        TextView pushUpTask = (TextView)findViewById(R.id.pushUpTask);
+        TextView sitUpTask = (TextView)findViewById(R.id.sitUpTask);
         if(level.equals("begineer")){
-            pushUpTask.setText("Do Push Up 30 times");
+            sitUpTask.setText("Do Push Up 30 times");
         }else if(level.equals("intermediate")){
-            pushUpTask.setText("Do Push Up 60 times");
+            sitUpTask.setText("Do Push Up 60 times");
         }else if(level.equals("advanced")){
-            pushUpTask.setText("Do Push Up 90 times");
+            sitUpTask.setText("Do Push Up 90 times");
         }
     }
 

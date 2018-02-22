@@ -9,22 +9,44 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background ="@drawable/layout_bg" >
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="@string/situp" />
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/situp_icon"/>
+
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:text="Sit Up"
+                android:textColor="@color/headingColor"
+                android:textSize="45dp" />
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/situp_icon"
+                android:scaleX="-1"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/sitUpTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center_horizontal"
             android:text="Do Sit Up 30 times"
+            android:textColor="@color/bodyTextColor"
             android:textSize="18dp" />
 
         <Button
@@ -33,19 +55,16 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:onClick="taskComplete"
-            android:text="Selesai" />
+            android:text="Done!" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/headingColor"
             android:text="@string/situp_video" />
 
-
-
-        <!--<ScrollView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,14 +76,15 @@
             android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
 
             <ImageView
-                android:layout_width="260dp"
-                android:layout_height="158dp"
+                android:layout_width="207dp"
+                android:layout_height="113dp"
                 android:src="@drawable/situp_video_1" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="103dp"
                 android:layout_height="wrap_content"
-                android:text="@string/situp_demo" />
+                android:text="@string/situp_demo"
+                android:textColor="@color/bodyTextColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,13 +98,15 @@
             android:layout_margin="4dp">
 
             <ImageView
-                android:layout_width="258dp"
-                android:layout_height="148dp"
+                android:layout_width="207dp"
+                android:layout_height="113dp"
                 android:src="@drawable/situp_video_2" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="106dp"
                 android:layout_height="wrap_content"
-                android:text="@string/motivation_situp"/>
+                android:text="@string/motivation_situp"
+                android:textColor="@color/bodyTextColor" />
         </LinearLayout>
 
     </LinearLayout>
