@@ -2,6 +2,10 @@ package com.example.leo.fitnessdiy;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity
         implements ExerciseFragment.OnFragmentInteractionListener,
@@ -21,6 +26,12 @@ public class HomeActivity extends AppCompatActivity
                    BlankFragment.OnFragmentInteractionListener{
 
     private FloatingActionButton chatButton;
+
+    // Sensor variable declaration
+    private SensorManager sensorManager;
+    private Sensor proximitySensor;
+    private SensorEventListener proximitySensorListener;
+
 
     private final String LOG_TAG = "BACKGROUND";
     @Override
@@ -56,6 +67,30 @@ public class HomeActivity extends AppCompatActivity
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
+
+        // Proximity Sensor
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        if (proximitySensor == null) {
+            Toast.makeText(this, "Proximity sensor is not available !", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        proximitySensorListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                if (sensorEvent.values[0] < proximitySensor.getMaximumRange()) {
+                    Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                    startActivity(i);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+            }
+        };
+
     }
 
     public void openHistory(View view) {
@@ -94,6 +129,19 @@ public class HomeActivity extends AppCompatActivity
     public void goToChat(View view) {
         Intent i = new Intent(getApplicationContext(), ChatActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(proximitySensorListener, proximitySensor,
+                2 * 1000 * 1000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(proximitySensorListener);
     }
 
 

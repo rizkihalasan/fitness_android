@@ -40,6 +40,7 @@ dependencies {
 
     compile 'com.android.support:design:26.1.0'
     compile 'com.firebaseui:firebase-ui:0.6.0'
+    compile 'com.firebase:firebase-client-android:2.5.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
