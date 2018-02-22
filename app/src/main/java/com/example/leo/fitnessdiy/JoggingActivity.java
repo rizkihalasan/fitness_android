@@ -59,6 +59,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -111,10 +112,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+
         // save instance state
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
@@ -454,7 +452,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     }
 
     public void stopJogging(View view) {
-        infoJoggingEnd.setText("\n" + getCurrentLocation());
+        infoJoggingEnd.setText(getCurrentLocation());
         mButton.setText("START");
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -477,31 +475,30 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         );
         // TODO : id_user sesuai id user yang login
         int id_user = 1;
+        String url = api.newJoggingHistory(
+                id_user,
+                jogging.getDate(),
+                jogging.getStart(),
+                jogging.getEnd(),
+                jogging.getDistance(),
+                jogging.getStartingPoint(),
+                jogging.getEndPoint()
+        );
+        Log.d(TAG, url);
         try {
-            String url = api.newJoggingHistory(
-                    id_user,
-                    jogging.getDate(),
-                    jogging.getStart(),
-                    jogging.getEnd(),
-                    jogging.getDistance(),
-                    jogging.getStartingPoint(),
-                    jogging.getEndPoint()
-            );
-            Log.d(TAG, url);
             String response = NetworkUtils.getResponseFromHttpUrl(
                     new URL(url)
             );
-            JSONObject jsonObject = new JSONObject(response);
-            if (jsonObject.getString("error") == null) {
-                Log.d(TAG, "Inserting new record successful");
-            } else {
-                Log.e(TAG, jsonObject.getString("error"));
-            }
+            Log.d(TAG, response);
+//            JSONObject jsonObject = new JSONObject(response);
+//            if (jsonObject.getString("error") == null) {
+//                Log.d(TAG, "Inserting new record successful");
+//            } else {
+//                Log.e(TAG, jsonObject.getString("error"));
+//            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
