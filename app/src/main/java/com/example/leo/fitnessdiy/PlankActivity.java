@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.leo.fitnessdiy.Utilities.NetworkUtils;
-import com.example.leo.fitnessdiy.model.History;
 import com.example.leo.fitnessdiy.model.Users;
 import com.example.leo.fitnessdiy.routes.api;
 

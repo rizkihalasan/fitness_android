@@ -20,4 +20,10 @@ public class api {
                 "&date="+date+"&start="+start+"&end="+end+"&distance="+distance+"&spoint="+
                 sPoint+"&epoint=" + ePoint;
     }
+
+    public static final String JOGGING_HISTORY_URL = BASE_URL + "jogging_history.php?user=";
+
+    public static final String PUSHUP_HISTORY_URL = BASE_URL + "pushup_history.php?user=";
+
+    public static final String SITUP_HISTORY_URL = BASE_URL + "situp_history.php?user=";
 }
