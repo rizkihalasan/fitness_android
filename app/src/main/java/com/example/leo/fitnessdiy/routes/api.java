@@ -26,4 +26,6 @@ public class api {
     public static final String PUSHUP_HISTORY_URL = BASE_URL + "pushup_history.php?user=";
 
     public static final String SITUP_HISTORY_URL = BASE_URL + "situp_history.php?user=";
+
+    public static final String EDIT_LEVEL_URL = BASE_URL + "edit_level.php?";
 }
