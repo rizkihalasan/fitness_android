@@ -134,7 +134,7 @@ public class ChatActivity extends AppCompatActivity {
             float delta = acelVal - acelLast;
             shake = shake * 0.9f + delta; // perform low-cut filter
             if (shake >12) {
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent i = new Intent(getApplicationContext(), HIstoryActivity.class);
                 startActivity(i);
             }
         }
