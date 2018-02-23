@@ -10,21 +10,43 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background ="@drawable/layout_bg" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="@string/pushup" />
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/pushup_icon"/>
+
+            <TextView
+                android:layout_width="173dp"
+                android:layout_height="match_parent"
+                android:text="Push Up"
+                android:textColor="@color/headingColor"
+                android:textSize="45dp" />
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/pushup_icon"
+                android:scaleX="-1"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/pushUpTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
             android:text="Do Push Up 30 Times"
+            android:textColor="@color/bodyTextColor"
             android:textSize="18dp" />
 
         <Button
@@ -32,20 +54,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
+            android:textColor="@color/headingColor"
             android:onClick="taskComplete"
-            android:text="Selesai" />
+            android:text="Done!" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/headingColor"
             android:text="@string/pushup_video" />
-
-
-
-        <!--<ScrollView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -54,41 +73,42 @@
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:orientation="horizontal"
             android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
 
             <ImageView
-                android:layout_width="260dp"
-                android:layout_height="158dp"
+                android:layout_width="207dp"
+                android:layout_height="113dp"
+                android:baselineAligned="false"
                 android:src="@drawable/pushup_video_1" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pushup_demo" />
+                android:layout_width="106dp"
+                android:layout_height="53dp"
+                android:text="@string/pushup_demo"
+                android:textColor="@color/headingColor" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0"
+            android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:layout_margin="4dp">
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0">
 
             <ImageView
-                android:layout_width="258dp"
-                android:layout_height="148dp"
+                android:layout_width="206dp"
+                android:layout_height="112dp"
                 android:src="@drawable/pushup_video_2" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/motivation_pushup"/>
+                android:textColor="@color/headingColor"
+                android:text="@string/motivation_pushup" />
         </LinearLayout>
-
-        <!--</ScrollView>-->
 
     </LinearLayout>
 

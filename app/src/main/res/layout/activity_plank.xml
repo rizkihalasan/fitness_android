@@ -7,16 +7,36 @@
     tools:context="com.example.leo.fitnessdiy.PlankActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/layout_bg"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="@string/plank"
-            android:textSize="32sp" />
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:src="@drawable/plank_icon" />
+
+            <TextView
+                android:layout_width="118dp"
+                android:layout_height="match_parent"
+                android:text="Plank"
+                android:textColor="@color/headingColor"
+                android:textSize="45dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:scaleX="-1"
+                android:src="@drawable/plank_icon" />
+
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -31,16 +51,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:textColor="@color/headingColor"
             android:text=""
             android:textSize="32sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="@string/plank_video"
-            android:textSize="30sp"/>
-
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/headingColor"
+            android:text="@string/plank_video" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,43 +71,41 @@
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:orientation="vertical"
-            android:tag="https://www.youtube.com/watch?v=TvxNkmjdhMM">
+            android:tag="https://www.youtube.com/watch?v=IODxDxX7oi4">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_width="207dp"
+                android:layout_height="113dp"
+                android:baselineAligned="false"
                 android:src="@drawable/plank_video_1" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="How to Plank"
-                android:textSize="20sp" />
+                android:layout_width="103dp"
+                android:layout_height="53dp"
+                android:text="@string/plank_demo"
+                android:textColor="@color/headingColor" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="openVideo"
-            android:orientation="vertical"
-            android:tag="https://www.youtube.com/watch?v=_nZgpZLf7ZA">
+            android:orientation="horizontal"
+            android:tag="https://www.youtube.com/watch?v=lHjj5vmzpy0">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_width="206dp"
+                android:layout_height="112dp"
                 android:src="@drawable/plank_video_2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Benefits of Plank"
-                android:textSize="20sp" />
+                android:textColor="@color/headingColor"
+                android:text="@string/motivation_plank" />
         </LinearLayout>
 
 
