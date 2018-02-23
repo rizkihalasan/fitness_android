@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppThemeNoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,26 +37,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/AppThemeNoTitle"/>
-        <activity android:name=".RegistrationActivity"
-            android:theme="@style/AppThemeNoTitle"/>
-        <activity android:name=".HIstoryActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".HomeActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".PlankActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".PushupActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".SitupActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ChatActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".LevelActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ExerciseActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name=".HIstoryActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PlankActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PushupActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SitupActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LevelActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ExerciseActivity"
+            android:theme="@style/AppTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -72,6 +83,7 @@
             android:name=".JoggingActivity"
             android:label="@string/title_activity_jogging" />
         <activity android:name=".SettingActivity" />
+        <activity android:name=".RunActivity"></activity>
     </application>
 
 </manifest>

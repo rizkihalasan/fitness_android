@@ -11,6 +11,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -24,12 +25,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +43,10 @@ import com.example.leo.fitnessdiy.routes.api;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlaceDetectionClient;
@@ -93,13 +98,15 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 25;
+    private static final int DEFAULT_ZOOM = 17;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
+    private Location startLocation;
+    private Location endLocation;
 
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
@@ -118,6 +125,9 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     SensorManager sensorManager;
     Sensor stepSensor;
     private double distance = 0;
+    private CardView info;
+    private LocationCallback mLocationCallback;
+    LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,16 +147,29 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
         infoJoggingStart = (TextView) findViewById(R.id.tv_info_start);
 
         infoJoggingEnd = (TextView) findViewById(R.id.tv_info_end);
 
         mButton = (Button) findViewById(R.id.control_button);
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                for (Location location : locationResult.getLocations()) {
+                    distance += PositionUtils.distance(mLastKnownLocation.getLatitude(),
+                            mLastKnownLocation.getLongitude(),
+                            location.getLatitude(),
+                            location.getLongitude());
+                }
+            }
+        };
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -197,6 +220,8 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         updateLocationUI();
 
         getDeviceLocation();
+
+//        mMap.addMarker(new MarkerOptions())
     }
 
     private void getLocationPermission() {
@@ -221,8 +246,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                             mLastKnownLocation = task.getResult();
                             LatLng position = new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude());
-//                            mMap.addMarker(
-//                                    new MarkerOptions().position(position).title("Your Position"));
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,
                                     DEFAULT_ZOOM));
                         } else {
@@ -233,12 +257,14 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                                     DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
+                        Log.d(TAG, getCurrentLocation(mLastKnownLocation));
                     }
                 });
             }
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -261,10 +287,6 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     public void onLocationChanged(Location location) {
         mMap.clear();
 
-        distance += PositionUtils.distance(mLastKnownLocation.getLatitude(),
-                mLastKnownLocation.getLongitude(),
-                location.getLatitude(),
-                location.getLongitude());
         MarkerOptions mp = new MarkerOptions();
 
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
@@ -321,6 +343,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     }
 
     private void updateLocationUI() {
+        Log.d(TAG, "Updating Location UI");
         if (mMap == null) {
             return;
         }
@@ -428,15 +451,15 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
                 .show();
     }
 
-    public String getCurrentLocation() {
+    public String getCurrentLocation(Location location) {
         String loc = "";
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses = null;
         String errorMessage = "";
         try {
-            addresses = geocoder.getFromLocation(mLastKnownLocation.getLatitude(),
-                    mLastKnownLocation.getLongitude(), 1);
+            addresses = geocoder.getFromLocation(location.getLatitude(),
+                    location.getLongitude(), 1);
 
             loc = addresses.get(0).getAddressLine(0);
         } catch (IOException e) {
@@ -445,15 +468,28 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
             errorMessage = "using invalid latitude and longitude data";
 
             Log.e(TAG, errorMessage + ". " +
-                    "Latitude = " + mLastKnownLocation.getLatitude() +
+                    "Latitude = " + location.getLatitude() +
                     ", Longitude = " +
-                    mLastKnownLocation.getLongitude(), e);
+                    location.getLongitude(), e);
         }
 
         return loc;
     }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
     public void startJogging(View view) {
-        infoJoggingStart.setText(getCurrentLocation());
+        info = (CardView) findViewById(R.id.tv_info);
+        getDeviceLocation();
+        startLocation = mLastKnownLocation;
+        info.setVisibility(View.VISIBLE);
+        infoJoggingStart.setText(getCurrentLocation(startLocation));
+        infoJoggingEnd.setText("");
         mButton.setText("STOP");
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -465,10 +501,25 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         startTime = new SimpleDateFormat("HH:mm:ss")
                 .format(Calendar.getInstance().getTime());
         distance = 0;
+        try {
+            createLocationRequest();
+
+            if (mLocationPermissionGranted) {
+                mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
+                        mLocationCallback,
+                        null /* Looper */);
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void stopJogging(View view) {
-        infoJoggingEnd.setText(getCurrentLocation());
+
+        getDeviceLocation();
+        endLocation = mLastKnownLocation;
+        infoJoggingEnd.setText(getCurrentLocation(endLocation));
         mButton.setText("START");
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -516,13 +567,17 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-//    private class AddNewJogging extends AsyncTask<Void, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//
-//        }
-//    }
+        //Add Marker start and end Position
+        mMap.addMarker(new MarkerOptions().title("Start")
+                .position(new LatLng(startLocation.getLatitude(), startLocation.getLongitude()))
+                .snippet("You start from Here"));
+
+        mMap.addMarker(new MarkerOptions().title("End")
+                .position(new LatLng(endLocation.getLatitude(), endLocation.getLongitude()))
+                .snippet("You're done Here"));
+
+        mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+
+    }
 }
