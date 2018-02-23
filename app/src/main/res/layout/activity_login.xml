@@ -2,27 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
     android:background="@drawable/layout_bg"
+    android:padding="8dp"
+    android:layout_margin="16dp"
     android:orientation="vertical"
-    android:layout_gravity="top|center"
+    android:layout_gravity="center"
     tools:context="com.example.leo.fitnessdiy.LoginActivity">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textAlignment="center"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_marginBottom="8dp"/>
+
     <EditText
         android:id="@+id/login_email"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:layout_margin="8dp"/>
 
+
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/password"
@@ -30,11 +39,14 @@
         android:layout_margin="8dp"/>
 
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="8dp"
         android:background="@drawable/buttton_login"
+        android:padding="8dp"
+        android:textColor="#ffffff"
         android:onClick="doLogin"
         android:text="@string/login"
         android:textSize="20sp" />

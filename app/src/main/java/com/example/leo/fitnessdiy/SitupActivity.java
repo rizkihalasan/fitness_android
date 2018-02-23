@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
@@ -36,11 +37,11 @@ public class SitupActivity extends AppCompatActivity{
     public void setSitUpFrequency(String level){
         TextView sitUpTask = (TextView)findViewById(R.id.sitUpTask);
         if(level.equals("begineer")){
-            sitUpTask.setText("Do Push Up 30 times");
+            sitUpTask.setText("Do Sit Up 30 times");
         }else if(level.equals("intermediate")){
-            sitUpTask.setText("Do Push Up 60 times");
+            sitUpTask.setText("Do Sit Up 60 times");
         }else if(level.equals("advanced")){
-            sitUpTask.setText("Do Push Up 90 times");
+            sitUpTask.setText("Do Sit Up 90 times");
         }
     }
 
@@ -58,5 +59,14 @@ public class SitupActivity extends AppCompatActivity{
     public void taskComplete(View view) {
         TextView tv = (TextView)findViewById(R.id.sitUpTask);
         tv.setText("Berhasil");
+    }
+
+    public void taskBegin(View view) {
+        TextView tv = (TextView)findViewById(R.id.sitUpTask);
+        Button button1 = (Button) findViewById(R.id.start_situp_button);
+        button1.setVisibility(View.GONE);
+
+        Button button2 = (Button) findViewById(R.id.finish_situp_button);
+        button2.setVisibility(View.VISIBLE);
     }
 }

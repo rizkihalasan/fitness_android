@@ -93,7 +93,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 25;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
 
@@ -274,7 +274,7 @@ public class JoggingActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16
         ));
-        mLastKnownLocation = location;
+        getDeviceLocation();
     }
 
     @Override

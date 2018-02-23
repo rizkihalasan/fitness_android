@@ -30,4 +30,6 @@ public class api {
     public static final String SITUP_HISTORY_URL = BASE_URL + "situp_history.php?user=";
 
     public static final String EDIT_LEVEL_URL = BASE_URL + "edit_level.php?";
+
+    public static final String ADD_PLANK_HISTORY_URL = BASE_URL + "add_plank_history.php?";
 }

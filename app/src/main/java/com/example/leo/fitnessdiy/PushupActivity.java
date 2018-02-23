@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
@@ -59,5 +60,14 @@ public class PushupActivity extends AppCompatActivity{
     public void taskComplete(View view) {
         TextView tv = (TextView)findViewById(R.id.pushUpTask);
         tv.setText("Berhasil");
+    }
+
+    public void taskBegin(View view) {
+        TextView tv = (TextView)findViewById(R.id.pushUpTask);
+        Button button1 = (Button) findViewById(R.id.start_pushup_button);
+        button1.setVisibility(View.GONE);
+
+        Button button2 = (Button) findViewById(R.id.finish_pushup_button);
+        button2.setVisibility(View.VISIBLE);
     }
 }

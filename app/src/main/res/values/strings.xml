@@ -31,7 +31,10 @@
     <string name="plank_history">Plank History</string>
     <string name="pushup_history">Push Up History</string>
     <string name="situp_history">Sit Up History</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">REGISTER</string>
     <string name="situp_video">Need Insight?</string>
     <string name="plank_demo">How to Plank</string>
     <string name="motivation_plank">Benefit of Plank</string>
+    <string name="register_req">Don\'t Have Account?</string>
 </resources>
