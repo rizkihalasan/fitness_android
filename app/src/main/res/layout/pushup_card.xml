@@ -9,13 +9,15 @@
         android:id="@+id/pushup_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Title" />
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/pushup_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat" />
+        style="@style/TextAppearance.AppCompat"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/push_frequency"

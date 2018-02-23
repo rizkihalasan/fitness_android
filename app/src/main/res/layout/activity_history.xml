@@ -68,7 +68,7 @@
                     android:layout_height="40dp"
                     android:layout_marginRight="8dp"
                     android:contentDescription="TODO"
-                    android:src="@drawable/jogging_icon"/>
+                    android:src="@drawable/plank_icon"/>
 
                 <TextView
                     android:id="@+id/plank_title"
@@ -111,7 +111,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
                 android:contentDescription="TODO"
-                android:src="@drawable/jogging_icon"/>
+                android:src="@drawable/pushup_icon"/>
 
             <TextView
                 android:id="@+id/pushup_title"
@@ -154,7 +154,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
                 android:contentDescription="TODO"
-                android:src="@drawable/jogging_icon"/>
+                android:src="@drawable/situp_icon"/>
 
             <TextView
                 android:id="@+id/situp_title"

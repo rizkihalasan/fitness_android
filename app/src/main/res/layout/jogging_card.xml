@@ -9,12 +9,14 @@
         android:id="@+id/jogging_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        style="@style/TextAppearance.AppCompat.Title" />
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#000000"/>
     
     <TextView
         android:id="@+id/jogging_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         style="@style/TextAppearance.AppCompat" />
 
     <TextView

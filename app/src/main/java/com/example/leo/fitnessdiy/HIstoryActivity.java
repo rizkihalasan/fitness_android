@@ -2,6 +2,7 @@ package com.example.leo.fitnessdiy;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.example.leo.fitnessdiy.model.Jogging;
 import com.example.leo.fitnessdiy.model.Plank;
 import com.example.leo.fitnessdiy.model.PushUp;
 import com.example.leo.fitnessdiy.model.SitUp;
+import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
 import com.example.leo.fitnessdiy.routes.api;
 
 
@@ -46,6 +48,9 @@ public class HIstoryActivity extends AppCompatActivity {
     private List<Plank> plankHistory = new ArrayList<>();
     private List<SitUp> situpHistory = new ArrayList<>();
     public static final String TAG = HIstoryActivity.class.getSimpleName();
+    private int iduser;
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile = "com.example.leo.fitnessdiy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,10 @@ public class HIstoryActivity extends AppCompatActivity {
         mHistoryView = (ListView) findViewById(R.id.history);
 
         final PlankListAdapter plankListAdapter = new PlankListAdapter(plankHistory, this);
+
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+        iduser = mPreferences.getInt(UsersSharedPreferences.ID_USERS, 0);
 
         jogging = (CardView) findViewById(R.id.jogging);
         jogging.setVisibility(View.GONE);
@@ -106,7 +115,7 @@ public class HIstoryActivity extends AppCompatActivity {
     public void getJoggingData() {
         try {
             String response = NetworkUtils.getResponseFromHttpUrl(
-                    new URL(api.JOGGING_HISTORY_URL + "1")
+                    new URL(api.JOGGING_HISTORY_URL + iduser)
             );
             Log.d(TAG, response);
             JSONArray jsonArray = new JSONArray(response);
@@ -133,7 +142,7 @@ public class HIstoryActivity extends AppCompatActivity {
     public void getPlankData() {
         try {
             String response = NetworkUtils.getResponseFromHttpUrl(
-                    new URL(api.PLANK_HISTORY_URL + "1")
+                    new URL(api.PLANK_HISTORY_URL + iduser)
             );
             Log.d(TAG, response);
             JSONArray jsonArray = new JSONArray(response);
@@ -158,7 +167,7 @@ public class HIstoryActivity extends AppCompatActivity {
     public void getPushupData() {
         try {
             String response = NetworkUtils.getResponseFromHttpUrl(
-                    new URL(api.PUSHUP_HISTORY_URL + "1")
+                    new URL(api.PUSHUP_HISTORY_URL + iduser)
             );
             Log.d(TAG, response);
             JSONArray jsonArray = new JSONArray(response);
@@ -183,7 +192,7 @@ public class HIstoryActivity extends AppCompatActivity {
     public void getSitupData() {
         try {
             String response = NetworkUtils.getResponseFromHttpUrl(
-                    new URL(api.SITUP_HISTORY_URL + "1")
+                    new URL(api.SITUP_HISTORY_URL + iduser)
             );
             Log.d(TAG, response);
             JSONArray jsonArray = new JSONArray(response);
