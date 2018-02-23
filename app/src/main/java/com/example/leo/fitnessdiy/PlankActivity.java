@@ -58,10 +58,11 @@ public class PlankActivity extends AppCompatActivity {
         Date date = new Date();
 
         plank_date = formatDate.format(date);
-        Log.d(LOG_TAG, plank_date);
+//        Log.d(LOG_TAG, plank_date);
 
         plank_time_start = formatTime.format(date);
-        Log.d(LOG_TAG, plank_time_start);
+//        Log.d(LOG_TAG, plank_time_start);
+        user = Integer.toString(mPreferences.getInt(UsersSharedPreferences.ID_USERS, -999));
     }
 
     public int setCountTime(String level){
@@ -104,16 +105,16 @@ public class PlankActivity extends AppCompatActivity {
                 SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
                 plank_time_end = formatTime.format(new Date());
                 Log.d(LOG_TAG, plank_time_end);
-                String user = Integer.toString(mPreferences.getInt(UsersSharedPreferences.ID_USERS, -999));
-                addThePlankHistory(user, plank_date, plank_time_start, plank_time_end, plank_duration);
+
+                addPlankHistory(user, plank_date, plank_time_start, plank_time_end, plank_duration);
             }
         }.start();
     }
 
-    public void addThePlankHistory(String user, String plank_date, String plank_time_start,
-                                   String plank_time_end, String plank_duration){
+    public void addPlankHistory(String user, String plank_date, String plank_time_start,
+                                String plank_time_end, String plank_duration){
         String urlstring = api.ADD_PLANK_HISTORY_URL+"user="+user+"&plank_date="+plank_date+"&plank_time_start="+plank_time_start+
-                                                    "&plank_time_end="+plank_time_end+"&plank_duration="+plank_duration;
+                "&plank_time_end="+plank_time_end+"&plank_duration="+plank_duration;
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

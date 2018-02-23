@@ -4,18 +4,36 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.leo.fitnessdiy.model.UsersSharedPreferences;
+import com.example.leo.fitnessdiy.routes.api;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Created by Heil on 2/19/2018.
  */
 
 public class PushupActivity extends AppCompatActivity{
+    private String user;
+    private String pushup_date;
+    private String pushup_time_start;
+    private String pushup_time_end;
+    private String pushup_frequency;
+    private String LOG_TAG = "PUSHUP ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +50,9 @@ public class PushupActivity extends AppCompatActivity{
 
         int background = mPreferences.getInt(BACKGROUND_KEY, R.drawable.green_theme);
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
+
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        pushup_date = formatDate.format(new Date());
     }
 
     public void setPushUpFrequency(String level){
@@ -60,6 +81,11 @@ public class PushupActivity extends AppCompatActivity{
     public void taskComplete(View view) {
         TextView tv = (TextView)findViewById(R.id.pushUpTask);
         tv.setText("Berhasil");
+
+        SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+        pushup_time_end = formatTime.format(new Date());
+        addPlankHistory(user, pushup_date, pushup_time_start, pushup_time_end, pushup_frequency);
+        Log.d(LOG_TAG, "waktu selesai pushup : "+pushup_time_end);
     }
 
     public void taskBegin(View view) {
@@ -69,5 +95,36 @@ public class PushupActivity extends AppCompatActivity{
 
         Button button2 = (Button) findViewById(R.id.finish_pushup_button);
         button2.setVisibility(View.VISIBLE);
+
+        SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+        pushup_time_start = formatTime.format(new Date());
+        Log.d(LOG_TAG, "waktu mulai pushup : "+pushup_time_start);
+    }
+
+    public void addPlankHistory(String user, String pushup_date, String pushup_time_start,
+                                String pushup_time_end, String pushup_frequency){
+
+        String urlstring = api.ADD_PUSHUP_HISTORY_URL+"user="+user+"&pushup_date="+pushup_date+"&pushup_time_start="+pushup_time_start+
+                "&pushup_time_end="+pushup_time_end+"&pushup_frequency="+pushup_frequency;
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        try{
+            URL url = new URL(urlstring);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            try{
+                InputStream in = urlConnection.getInputStream();
+                Scanner scanner = new Scanner(in);
+            } finally {
+                urlConnection.disconnect();
+            }
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
