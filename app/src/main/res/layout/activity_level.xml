@@ -11,32 +11,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Your Level"
-        android:layout_marginBottom="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
         android:textSize="40sp" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left">
+        android:layout_gravity="center"
+        android:background="@drawable/layout_bg"
+        android:minWidth="200dp">
+
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/level_begineer"
-            android:text="@string/beginner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="selectLevel"
-            />
+            android:textSize="22sp"
+            android:text="@string/beginner" />
+
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/level_intermediate"
-            android:text="@string/intermediate"
-            android:onClick="selectLevel"/>
-        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="selectLevel"
+            android:textSize="22sp"
+            android:text="@string/intermediate" />
+
+        <RadioButton
             android:id="@+id/level_advanced"
-            android:text="@string/advanced"
-            android:onClick="selectLevel"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectLevel"
+            android:textSize="22sp"
+            android:text="@string/advanced" />
     </RadioGroup>
 
 

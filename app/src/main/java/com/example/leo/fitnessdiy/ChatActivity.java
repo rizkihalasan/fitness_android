@@ -73,14 +73,11 @@ public class ChatActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackground(getResources().getDrawable(background));
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance().createSignInIntentBuilder().build(),
                     SIGN_IN_REQUEST_CODE
             );
         } else {
-            // User is already signed in. Therefore, display
-            // a welcome Toast
             Toast.makeText(this,
                     "Welcome " + FirebaseAuth.getInstance()
                             .getCurrentUser()
@@ -97,8 +94,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText input = (EditText)findViewById(R.id.input);
 
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
                 FirebaseDatabase.getInstance()
                         .getReference()
                         .push()
@@ -108,7 +103,6 @@ public class ChatActivity extends AppCompatActivity {
                                         .getDisplayName())
                         );
 
-                // Clear the input
                 input.setText("");
             }
         });
@@ -132,9 +126,9 @@ public class ChatActivity extends AppCompatActivity {
             acelLast = acelVal;
             acelVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
             float delta = acelVal - acelLast;
-            shake = shake * 0.9f + delta; // perform low-cut filter
+            shake = shake * 0.9f + delta;
             if (shake >12) {
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent i = new Intent(getApplicationContext(), HIstoryActivity.class);
                 startActivity(i);
             }
         }
@@ -199,12 +193,10 @@ public class ChatActivity extends AppCompatActivity {
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
-                // Get references to the views of message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
-                // Set their text
                 messageText.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());
                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",

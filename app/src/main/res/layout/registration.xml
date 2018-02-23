@@ -3,123 +3,133 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:context=".RegistrationActivity"
     android:layout_height="match_parent">
 
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/layout_bg"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context="com.example.leo.fitnessdiy.RegistrationActivity">
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="54dp">
 
         <EditText
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/name"
+            android:inputType="textPersonName"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="55dp" />
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="@string/password"
+            android:inputType="textPassword"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="131dp" />
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="206dp" />
 
         <EditText
             android:id="@+id/phone"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone"
             android:hint="@string/phone"
+            android:inputType="phone"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="272dp" />
 
         <EditText
             android:id="@+id/address"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPostalAddress"
             android:hint="@string/address"
+            android:inputType="textPostalAddress"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="344dp" />
 
         <EditText
             android:id="@+id/age"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPostalAddress"
             android:hint="Age"
+            android:inputType="textPostalAddress"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="344dp" />
 
         <TextView
             android:layout_width="164dp"
             android:layout_height="wrap_content"
-            android:text="@string/choice_command" />
-
+            android:layout_marginRight="50dp"
+            android:text="@string/choice_command"
+            android:textColor="@color/headingColor"
+            android:textSize="18sp" />
 
 
         <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="75dp">
 
             <RadioButton
                 android:id="@+id/level_begineer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="getLevel"
                 android:text="@string/beginner"
                 tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="417dp"
-                android:onClick="getLevel"/>
+                tools:layout_editor_absoluteY="417dp" />
 
             <RadioButton
                 android:id="@+id/level_intermediate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="getLevel"
                 android:text="@string/intermediate"
                 tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="463dp"
-                android:onClick="getLevel"/>
+                tools:layout_editor_absoluteY="463dp" />
 
             <RadioButton
                 android:id="@+id/level_advanced"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="getLevel"
                 android:text="@string/advanced"
                 tools:layout_editor_absoluteX="220dp"
-                tools:layout_editor_absoluteY="417dp"
-                android:onClick="getLevel"/>
+                tools:layout_editor_absoluteY="417dp" />
 
         </RadioGroup>
 
         <Button
             android:id="@+id/registration_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
+            android:background="@drawable/buttton_login"
+            android:onClick="doRegistration"
             android:text="REGISTER"
-            android:onClick="doRegistration"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

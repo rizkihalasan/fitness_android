@@ -14,8 +14,8 @@ public class api {
     public static final String USERS_URL = BASE_URL + "users.php?user=";
 
     public static final String newJoggingHistory(int id_user, String date,
-                                               String start, String end, float distance,
-                                               String sPoint, String ePoint) {
+                                                 String start, String end, float distance,
+                                                 String sPoint, String ePoint) {
         return BASE_URL + "new_jogging_history.php?user=" + id_user +
                 "&date="+date+"&start="+start+"&end="+end+"&distance="+distance+"&spoint="+
                 sPoint+"&epoint=" + ePoint;
@@ -30,4 +30,8 @@ public class api {
     public static final String SITUP_HISTORY_URL = BASE_URL + "situp_history.php?user=";
 
     public static final String EDIT_LEVEL_URL = BASE_URL + "edit_level.php?";
+
+    public static final String ADD_PLANK_HISTORY_URL = BASE_URL + "add_plank_history.php?";
+
+    public static final String ADD_PUSHUP_HISTORY_URL = BASE_URL + "add_pushup_history.php?";
 }
