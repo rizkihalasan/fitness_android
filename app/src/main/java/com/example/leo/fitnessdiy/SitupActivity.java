@@ -106,8 +106,9 @@ public class SitupActivity extends AppCompatActivity{
 
     public void addSitupHistory(String user, String situp_date, String situp_time_start,
                                 String situp_time_end, String situp_frequency){
-        String urlstring = api.ADD_SITUP_HISTORY_URL+"user="+user+"&situp_date"+situp_date+"&situp_time_start"+situp_time_start+
+        String urlstring = api.ADD_SITUP_HISTORY_URL+"user="+user+"&situp_date="+situp_date+"&situp_time_start="+situp_time_start+
                 "&situp_time_end="+situp_time_end+"&situp_frequency="+situp_frequency;
+        Log.d(LOG_TAG+" (URL) : ", urlstring);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

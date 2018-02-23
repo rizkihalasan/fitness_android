@@ -111,6 +111,7 @@ public class PushupActivity extends AppCompatActivity{
 
         String urlstring = api.ADD_PUSHUP_HISTORY_URL+"user="+user+"&pushup_date="+pushup_date+"&pushup_time_start="+pushup_time_start+
                 "&pushup_time_end="+pushup_time_end+"&pushup_frequency="+pushup_frequency;
+        Log.d(LOG_TAG+" (URL) : ", urlstring);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
