@@ -53,15 +53,20 @@ public class PushupActivity extends AppCompatActivity{
 
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         pushup_date = formatDate.format(new Date());
+
+        user = Integer.toString(mPreferences.getInt(UsersSharedPreferences.ID_USERS, -999));
     }
 
     public void setPushUpFrequency(String level){
         TextView pushUpTask = (TextView)findViewById(R.id.pushUpTask);
         if(level.equals("begineer")){
+            pushup_frequency = ""+30;
             pushUpTask.setText("Do Push Up 30 times");
         }else if(level.equals("intermediate")){
+            pushup_frequency = ""+60;
             pushUpTask.setText("Do Push Up 60 times");
         }else if(level.equals("advanced")){
+            pushup_frequency = ""+90;
             pushUpTask.setText("Do Push Up 90 times");
         }
     }
@@ -84,7 +89,7 @@ public class PushupActivity extends AppCompatActivity{
 
         SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
         pushup_time_end = formatTime.format(new Date());
-        addPlankHistory(user, pushup_date, pushup_time_start, pushup_time_end, pushup_frequency);
+        addPushupHistory(user, pushup_date, pushup_time_start, pushup_time_end, pushup_frequency);
         Log.d(LOG_TAG, "waktu selesai pushup : "+pushup_time_end);
     }
 
@@ -101,11 +106,12 @@ public class PushupActivity extends AppCompatActivity{
         Log.d(LOG_TAG, "waktu mulai pushup : "+pushup_time_start);
     }
 
-    public void addPlankHistory(String user, String pushup_date, String pushup_time_start,
+    public void addPushupHistory(String user, String pushup_date, String pushup_time_start,
                                 String pushup_time_end, String pushup_frequency){
 
         String urlstring = api.ADD_PUSHUP_HISTORY_URL+"user="+user+"&pushup_date="+pushup_date+"&pushup_time_start="+pushup_time_start+
                 "&pushup_time_end="+pushup_time_end+"&pushup_frequency="+pushup_frequency;
+        Log.d(LOG_TAG+" (URL) : ", urlstring);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -123,7 +129,7 @@ public class PushupActivity extends AppCompatActivity{
             }
         } catch (MalformedURLException e){
             e.printStackTrace();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

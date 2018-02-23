@@ -34,4 +34,6 @@ public class api {
     public static final String ADD_PLANK_HISTORY_URL = BASE_URL + "add_plank_history.php?";
 
     public static final String ADD_PUSHUP_HISTORY_URL = BASE_URL + "add_pushup_history.php?";
+
+    public static final String ADD_SITUP_HISTORY_URL = BASE_URL + "add_situp_history.php?";
 }
