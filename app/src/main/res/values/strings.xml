@@ -37,4 +37,7 @@
     <string name="plank_demo">How to Plank</string>
     <string name="motivation_plank">Benefit of Plank</string>
     <string name="register_req">Don\'t Have Account?</string>
+    <string name="kosong">...</string>
+    <string name="start_run">Starting Point</string>
+    <string name="end_run">End Point</string>
 </resources>
