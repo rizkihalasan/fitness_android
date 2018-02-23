@@ -30,14 +30,14 @@
         android:layout_margin="8dp"/>
 
     <Button
-        android:layout_width="120dp"
-        android:textSize="20sp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:background="@drawable/buttton_login"
         android:layout_margin="8dp"
+        android:background="@drawable/buttton_login"
         android:onClick="doLogin"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:textSize="20sp" />
 
     <Button
         android:layout_width="191dp"
